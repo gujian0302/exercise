@@ -17,5 +17,21 @@ object HighOrderFunction{
 
   def closure = (x:Int) => x + incrementer
 
+  def summation(x:Int, y:Int => Int) = y(x)
+
+  def addWithoutSyntaxSugar(x:Int): Function1[Int,Int] = {
+    new Function1[Int,Int](){
+      def apply(y:Int):Int = x + y
+    }
+  }
+
+  def addWithSyntaxSugar(x:Int) = (y:Int) => x+y
+
+  def makeUpper(xs:List[String]) = xs map {
+    _.toUpperCase 
+  }
+
+  def makeWhatEverYouLike(xs:List[String], sideEffect: String => String) = xs map sideEffect
+  
 
 }
