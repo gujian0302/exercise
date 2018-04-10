@@ -19,6 +19,12 @@ class PartialFunctionSpec extends FlatSpec with Matchers{
 		val multiplyCurried4 = multiplyCurried(4)
 		multiplyCurried4(5) should be (20)
 
+		def customerFilter(f: Int => Boolean)(xs: List[Int]) = xs filter f
+
+		def onlyEven(x:Int) = x % 2 == 0
+
+		customerFilter(onlyEven)(List(3,4,5,6)) should be (List(4,6))
+
 	}
 
 }
