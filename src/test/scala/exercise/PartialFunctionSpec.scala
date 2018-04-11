@@ -25,6 +25,26 @@ class PartialFunctionSpec extends FlatSpec with Matchers{
 
 		customerFilter(onlyEven)(List(3,4,5,6)) should be (List(4,6))
 
+		val whatToDo = PartialFunction.doubleEvens orElse PartialFunction.tripleOdds
+
+		whatToDo(3) should be (9)
+		whatToDo(4) should be (8)
+
+		val whatToDoCase = PartialFunction.doubleEvensCase orElse PartialFunction.tripleOddsCase
+
+		whatToDoCase(3) should be (9)
+		whatToDoCase(4) should be (8)
+
+		val whatToDoAddFive = PartialFunction.doubleEvensCase orElse PartialFunction.tripleOddsCase andThen PartialFunction.addFive
+
+		whatToDoAddFive(3) should be (14)
+
+		val whatToDoPrint = PartialFunction.doubleEvensCase orElse PartialFunction.tripleOddsCase andThen (PartialFunction.printEven orElse PartialFunction.printOdd)
+
+		whatToDoPrint(3) should be ("ODD")
+		whatToDoPrint(4) should be ("EVEN")
+
+
 	}
 
 }
